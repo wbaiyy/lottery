@@ -20,59 +20,74 @@ AppAsset::register($this);
     <?= Html::csrfMetaTags() ?>
     <title><?= Html::encode($this->title) ?></title>
     <?php $this->head() ?>
+    <!--<link href='https://fonts.googleapis.com/css?family=Quicksand:400,700|Quattrocento+Sans:400,700|Palanquin:400,600|Raleway|Josefin+Sans' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="assets/css/font-awesome.css">
+    <link rel="stylesheet" href="assets/css/owl.carousel.css">
+    <link rel="stylesheet" href="assets/css/owl.theme.css">
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/style.css">-->
 </head>
 <body>
 <?php $this->beginBody() ?>
+<?php if(!isset($this->params['isLogin'])):?>
+    <header style="background: #950f0f;">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="logo">
+                        <h2><a href="index.html" style="color: #fffdfd;">wmm008</a></h2>
+                    </div>
+                </div>
+                <div class="col-md-8">
+                    <div id="menu" class="menu">
+                        <ul>
+                            <li><a href="index.html" class="active">首页</a></li>
+                            <li><a href="<?= \yii\helpers\Url::to('/site/announcement')?>">公告</a></li>
+                            <li><a href="account.html">账号管理</a></li>
+                            <li><a onclick="notice();">报表</a></li>
+                            <li><a href="contact.html">联系我们</a></li>
+                            <li><a onclick="notice();">在线客服</a></li>
+                            <li><a onclick="recovery();">密码恢复</a></li>
+                            <li><a href="edit_passwd.html">更改密码</a></li>
+                            <li><a href="new_url.html">最新网址</a></li>
+                            <li><a href="<?= \yii\helpers\Url::to('/site/logout')?>">退出</a></li>
 
-<div class="wrap">
-    <?php
-    NavBar::begin([
-        'brandLabel' => 'My Company',
-        'brandUrl' => Yii::$app->homeUrl,
-        'options' => [
-            'class' => 'navbar-inverse navbar-fixed-top',
-        ],
-    ]);
-    echo Nav::widget([
-        'options' => ['class' => 'navbar-nav navbar-right'],
-        'items' => [
-            ['label' => 'Home', 'url' => ['/site/index']],
-            ['label' => 'About', 'url' => ['/site/about']],
-            ['label' => 'Contact', 'url' => ['/site/contact']],
-            Yii::$app->user->isGuest ? (
-                ['label' => 'Login', 'url' => ['/site/login']]
-            ) : (
-                '<li>'
-                . Html::beginForm(['/site/logout'], 'post')
-                . Html::submitButton(
-                    'Logout (' . Yii::$app->user->identity->username . ')',
-                    ['class' => 'btn btn-link']
-                )
-                . Html::endForm()
-                . '</li>'
-            )
-        ],
-    ]);
-    NavBar::end();
-    ?>
-
-    <div class="container">
-        <?= Breadcrumbs::widget([
-            'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
-        ]) ?>
-        <?= $content ?>
-    </div>
-</div>
-
-<footer class="footer">
-    <div class="container">
-        <p class="pull-left">&copy; My Company <?= date('Y') ?></p>
-
-        <p class="pull-right"><?= Yii::powered() ?></p>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+<?php else:?>
+    <header style="background: #950f0f;">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12" align="center">
+                    <div class="logo">
+                        <h2><a href="login.html" style="color: #fffdfd;">简体版</a></h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+<?php endif;?>
+<?= $content ?>
+<footer>
+    <div class="main-footer">
+        <p> Copyright © 2018 By echo</p>
     </div>
 </footer>
-
 <?php $this->endBody() ?>
 </body>
+<script>
+    function notice() {
+        alert("该功能展示未开放，敬请期待！");
+        return false;
+    }
+    function recovery() {
+        alert("已恢复，初始密码为123456！");
+        window.location.href = "index.html";
+    }
+</script>
 </html>
 <?php $this->endPage() ?>

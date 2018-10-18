@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>agent</title>
+    <link href='https://fonts.googleapis.com/css?family=Quicksand:400,700|Quattrocento+Sans:400,700|Palanquin:400,600|Raleway|Josefin+Sans' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="assets/css/font-awesome.css">
+    <link rel="stylesheet" href="assets/css/owl.carousel.css">
+    <link rel="stylesheet" href="assets/css/owl.theme.css">
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body style="background-color: #eeeeee;">
+
+
+<header style="background: #950f0f;">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12" align="center">
+                <div class="logo">
+                    <h2><a href="login.html" style="color: #fffdfd;">简体版</a></h2>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+<div class="container">
+    <div class="row clearfix">
+        <div class="col-md-12" style="background-color: #e2e2e2;width: 320px;height: 280px;margin: 0 auto;margin-top: 20px;margin-bottom: 20px;">
+        <div class="col-md-12 column">
+            <div class="form-group" align="center" style="padding-top:20px;">
+                <button type="button" class="btn btn-large btn-primary">登录1</button>
+                <button type="button" class="btn btn-large btn-info">登录2</button>
+                <button type="button" class="btn btn-large btn-warning">登录3</button>
+            </div>
+            <form class="form-horizontal" role="form">
+                <div class="col-lg-10" style="padding-bottom: 20px;">
+                    <input type="text" class="form-control" name="username" placeholder="请输入账户名" required
+                           autofocus />
+                </div>
+
+                <div class="col-lg-10" style="padding-bottom: 20px;">
+                    <input type="password" class="form-control" name="password" placeholder="请输入密码" required
+                           autofocus />
+                </div>
+                <div class="col-lg-10" style="padding-bottom: 10px;">
+                    <input type="checkbox" class="col-lg-1">记住密码</input>
+                </div>
+                <div class="col-lg-10" style="padding-bottom: 20px;">
+                        <button type="submit" id="btn" class="btn btn-block btn-success" type="button">登入</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    </div>
+</div>
+<footer>
+    <div class="main-footer">
+        <p> Copyright © 2018 By echo</p>
+    </div>
+</footer>
+<script src="assets/js/jquery-2.1.4.js"></script>
+<script src="assets/js/bootstrap.min.js"></script>
+<script src="assets/js/jquery.slicknav.js"></script>
+<script src="assets/js/isotope.pkgd.min.js"></script>
+<script src="assets/js/owl.carousel.js"></script>
+<script src="assets/js/main.js"></script>
+</body>
+</html>
+<script>
+    $(function () {
+        $('#btn').click(function (e) {
+            window.location.href = "index.html";
+        });
+    });
+    function anotice() {
+        alert("该功能即将上线，敬请期待！");
+        return false;
+    }
+</script>

@@ -2,52 +2,88 @@
 
 /* @var $this yii\web\View */
 
-$this->title = 'My Yii Application';
+$this->title = 'My Agent';
 ?>
-<div class="site-index">
 
-    <div class="jumbotron">
-        <h1>Congratulations!</h1>
-
-        <p class="lead">You have successfully created your Yii-powered application.</p>
-
-        <p><a class="btn btn-lg btn-success" href="http://www.yiiframework.com">Get started with Yii</a></p>
-    </div>
-
-    <div class="body-content">
-
-        <div class="row">
-            <div class="col-lg-4">
-                <h2>Heading</h2>
-
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                    ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                    fugiat nulla pariatur.</p>
-
-                <p><a class="btn btn-default" href="http://www.yiiframework.com/doc/">Yii Documentation &raquo;</a></p>
+<div class="container">
+    <hr>
+    <div class="row">
+        <a href="announcement.html">
+            <div class="col-xs-6" align="center" style="background-color: #e5e5e5;border-right:2px solid #ffffff;">
+                <span class="glyphicon glyphicon-volume-up" style="color: #000;font-size: 60px;" aria-hidden="true"></span>
             </div>
-            <div class="col-lg-4">
-                <h2>Heading</h2>
-
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                    ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                    fugiat nulla pariatur.</p>
-
-                <p><a class="btn btn-default" href="http://www.yiiframework.com/forum/">Yii Forum &raquo;</a></p>
+        </a>
+        <a href="account.html">
+            <div class="col-xs-6" align="center" style="background-color: #e5e5e5;border-left:2px solid #ffffff;">
+                <span class="glyphicon glyphicon-user" style="color: #000;font-size: 60px;" aria-hidden="true"></span>
             </div>
-            <div class="col-lg-4">
-                <h2>Heading</h2>
-
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                    ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                    fugiat nulla pariatur.</p>
-
-                <p><a class="btn btn-default" href="http://www.yiiframework.com/extensions/">Yii Extensions &raquo;</a></p>
-            </div>
+        </a>
+        <div class="col-xs-6" align="center" style="background-color: #e5e5e5;border-right:2px solid #ffffff;">
+            <span style="color:#000;" align="center;">公告</span>
         </div>
-
+        <div class="col-xs-6" align="center" style="background-color: #e5e5e5;border-left:2px solid #ffffff;">
+            <span style="color:#000;" align="center;">账号管理</span>
+        </div>
     </div>
+    <hr>
+    <div class="row">
+        <a onclick="notice();">
+            <div class="col-xs-6" align="center" style="background-color: #e5e5e5;border-right:2px solid #ffffff;">
+                <span class="glyphicon glyphicon-list-alt" style="color: #000;font-size: 60px;" aria-hidden="true"></span>
+            </div>
+        </a>
+
+        <a href="contact.html">
+            <div class="col-xs-6" align="center" style="background-color: #e5e5e5;border-left:2px solid #ffffff;">
+                <span class="glyphicon glyphicon-earphone" style="color: #000;font-size: 60px;" aria-hidden="true"></span>
+            </div>
+        </a>
+        <div class="col-xs-6" align="center" style="background-color: #e5e5e5;border-right:2px solid #ffffff;">
+            <span style="color:#000;" align="center;">报表</span>
+        </div>
+        <div class="col-xs-6" align="center" style="background-color: #e5e5e5;border-left:2px solid #ffffff;">
+            <span style="color:#000;" align="center;">联系我们</span>
+        </div>
+    </div>
+    <hr>
+    <div class="row">
+        <a onclick="recovery();">
+            <div class="col-xs-6" align="center" style="background-color: #e5e5e5;border-right:2px solid #ffffff;">
+                <span class="glyphicon glyphicon-repeat" style="color: #000;font-size: 60px;" aria-hidden="true"></span>
+            </div>
+        </a>
+
+        <a href="edit_passwd.html">
+            <div class="col-xs-6" align="center" style="background-color: #e5e5e5;border-left:2px solid #ffffff;">
+                <span class="glyphicon glyphicon-lock" style="color: #000;font-size: 60px;" aria-hidden="true"></span>
+            </div>
+        </a>
+        <div class="col-xs-6" align="center" style="background-color: #e5e5e5;border-right:2px solid #ffffff;">
+            <span style="color:#000;" align="center;">密码恢复</span>
+        </div>
+        <div class="col-xs-6" align="center" style="background-color: #e5e5e5;border-left:2px solid #ffffff;">
+            <span style="color:#000;" align="center;">更改密码</span>
+        </div>
+    </div>
+    <hr>
+    <div class="row">
+        <a href="new_url.html">
+            <div class="col-xs-6" align="center" style="background-color: #e5e5e5;border-right:2px solid #ffffff;">
+                <span class="glyphicon glyphicon-link" style="color: #000;font-size: 60px;" aria-hidden="true"></span>
+            </div>
+        </a>
+
+        <a href="login.html">
+            <div class="col-xs-6" align="center" style="background-color: #e5e5e5;border-left:2px solid #ffffff;">
+                <span class="glyphicon glyphicon-log-out" style="color: #000;font-size: 60px;" aria-hidden="true"></span>
+            </div>
+        </a>
+        <div class="col-xs-6" align="center" style="background-color: #e5e5e5;border-right:2px solid #ffffff;">
+            <span style="color:#000;" align="center;">最新网站</span>
+        </div>
+        <div class="col-xs-6" align="center" style="background-color: #e5e5e5;border-left:2px solid #ffffff;">
+            <span style="color:#000;" align="center;">登出</span>
+        </div>
+    </div>
+    <hr>
 </div>

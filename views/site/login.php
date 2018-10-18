@@ -7,41 +7,51 @@
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
 
-$this->title = 'Login';
+$this->title = '登录';
+$this->params['isLogin'] = true;
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="site-login">
-    <h1><?= Html::encode($this->title) ?></h1>
 
-    <p>Please fill out the following fields to login:</p>
+<div class="container">
+    <div class="row clearfix">
+        <div class="col-md-12" style="background-color: #e2e2e2;width: 320px;height: 280px;margin: 0 auto;margin-top: 20px;margin-bottom: 20px;">
+            <div class="col-md-12 column">
+                <div class="form-group" align="center" style="padding-top:20px;">
+                    <button type="button" class="btn btn-large btn-primary">登录1</button>
+                    <button type="button" class="btn btn-large btn-info">登录2</button>
+                    <button type="button" class="btn btn-large btn-warning">登录3</button>
+                </div>
+                <form class="form-horizontal" role="form" action="<?= \yii\helpers\Url::to('/site/login')?>" method="post">
+                    <input type="hidden" name="_csrf" value="<?= Yii::$app->request->csrfToken ?>">
+                    <div class="col-lg-10" style="padding-bottom: 20px;">
+                        <input type="text" class="form-control" name="username" placeholder="请输入账户名" required
+                               autofocus />
+                    </div>
 
-    <?php $form = ActiveForm::begin([
-        'id' => 'login-form',
-        'options' => ['class' => 'form-horizontal'],
-        'fieldConfig' => [
-            'template' => "{label}\n<div class=\"col-lg-3\">{input}</div>\n<div class=\"col-lg-8\">{error}</div>",
-            'labelOptions' => ['class' => 'col-lg-1 control-label'],
-        ],
-    ]); ?>
+                    <div class="col-lg-10" style="padding-bottom: 20px;">
+                        <input type="password" class="form-control" name="password" placeholder="请输入密码" required
+                               autofocus />
+                    </div>
+                    <?php if($model->hasErrors()):?>
+                    <div>
+                        <?php
+                            $message = '';
+                            foreach ($model->getErrors() as $attr => $error) {
+                                $message .= implode(',', $error);
+                            }
+                        ?>
 
-        <?= $form->field($model, 'username')->textInput(['autofocus' => true]) ?>
-
-        <?= $form->field($model, 'password')->passwordInput() ?>
-
-        <?= $form->field($model, 'rememberMe')->checkbox([
-            'template' => "<div class=\"col-lg-offset-1 col-lg-3\">{input} {label}</div>\n<div class=\"col-lg-8\">{error}</div>",
-        ]) ?>
-
-        <div class="form-group">
-            <div class="col-lg-offset-1 col-lg-11">
-                <?= Html::submitButton('Login', ['class' => 'btn btn-primary', 'name' => 'login-button']) ?>
+                        <span id="errors" style="color: red"> <?=$message?></span>
+                    </div>
+                    <?php endif;?>
+                    <div class="col-lg-10" style="padding-bottom: 10px;">
+                        <input type="checkbox" class="col-lg-1">记住密码</input>
+                    </div>
+                    <div class="col-lg-10" style="padding-bottom: 20px;">
+                        <button type="submit" id="btn" class="btn btn-block btn-success" type="button">登入</button>
+                    </div>
+                </form>
             </div>
         </div>
-
-    <?php ActiveForm::end(); ?>
-
-    <div class="col-lg-offset-1" style="color:#999;">
-        You may login with <strong>admin/admin</strong> or <strong>demo/demo</strong>.<br>
-        To modify the username/password, please check out the code <code>app\models\User::$users</code>.
     </div>
 </div>

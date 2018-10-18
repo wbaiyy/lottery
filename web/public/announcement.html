@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>agent</title>
+    <link href='https://fonts.googleapis.com/css?family=Quicksand:400,700|Quattrocento+Sans:400,700|Palanquin:400,600|Raleway|Josefin+Sans' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="assets/css/font-awesome.css">
+    <link rel="stylesheet" href="assets/css/owl.carousel.css">
+    <link rel="stylesheet" href="assets/css/owl.theme.css">
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body style="line-height: 2.428571;color: #090909;">
+<header style="background: #950f0f;">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="logo">
+                    <h2><a href="index.html" style="color: #fffdfd;">wmm008</a></h2>
+                </div>
+            </div>
+            <div class="col-md-8">
+                <div id="menu" class="menu">
+                    <ul>
+                        <li><a href="index.html" class="active">首页</a></li>
+                        <li><a href="announcement.html">公告</a></li>
+                        <li><a href="account.html">账号管理</a></li>
+                        <li><a onclick="notice();">报表</a></li>
+                        <li><a href="contact.html">联系我们</a></li>
+                        <li><a onclick="notice();">在线客服</a></li>
+                        <li><a onclick="recovery();">密码恢复</a></li>
+                        <li><a href="edit_passwd.html">更改密码</a></li>
+                        <li><a href="new_url.html">最新网址</a></li>
+                        <li><a href="login.html">退出</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+<div class="container">
+        <div class="row" >
+            <div id="ann1" class="col-xs-4" align="center" style="background-color: #e5e5e5; color: #5f5d5d;" onclick="ch_level(1);">
+                <span  align="center;">一般公告</span>
+            </div>
+
+            <div id="ann2" class="col-xs-4" align="center" style="background-color: #5f5d5d;color: #fff;" onclick="ch_level(2);">
+                <span  align="center;">重要公告</span>
+            </div>
+
+            <div id="ann3" class="col-xs-4" align="center" style="background-color: #e5e5e5;color: #5f5d5d;" onclick="ch_level(3);">
+                <span  align="center;">个人公告</span>
+            </div>
+            <div id="ann4" class="col-xs-4" align="center" style="background-color: #5f5d5d; color: #e5e5e5;" onclick="ch_date(4);">
+                <span  align="center;">全部</span>
+            </div>
+            <div id="ann5" class="col-xs-4" align="center" style="background-color: #5f5d5d; color: #deb30d;" onclick="ch_date(5);">
+                <span  align="center;">今天</span>
+            </div>
+            <div id="ann6" class="col-xs-4" align="center" style="background-color: #5f5d5d; color: #deb30d;" onclick="ch_date(6);">
+                <span  align="center;">昨天</span>
+            </div>
+            <div class="col-xs-12">
+                <form class="navbar-form navbar-left" role="search">
+                    <div class="form-group" align="center">
+                    <input id="query" type="text" class="form-control" style="width:65%;float: left;"/>
+                    <button type="submit" class="btn btn-default active disabled btn-info">搜索</button>
+                    <button type="button" class="btn btn-default active disabled btn-danger" onclick="del();">清楚</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+</div>
+<div class="container">
+    <div class="row clearfix">
+        <div class="col-md-12 column">
+            <blockquote>
+                <p>
+                    公告公告公告公告公告公告公告公告公告公告.
+                </p> <small>2018-10-15</small>
+            </blockquote>
+        </div>
+        <div class="col-md-12 column">
+            <blockquote>
+                <p>
+                    公告公告公告公告公告公告公告公告公告公告.
+                </p> <small>2018-10-15</small>
+            </blockquote>
+        </div>
+        <div class="col-md-12 column">
+            <blockquote>
+                <p>
+                    公告公告公告公告公告公告公告公告公告公告.
+                </p> <small>2018-10-15</small>
+            </blockquote>
+        </div>
+    </div>
+</div>
+<footer>
+    <div class="main-footer">
+        <p style="color:#fff;"> Copyright © 2018 By echo</p>
+    </div>
+</footer>
+<script src="assets/js/jquery-2.1.4.js"></script>
+<script src="assets/js/bootstrap.min.js"></script>
+<script src="assets/js/jquery.slicknav.js"></script>
+<script src="assets/js/isotope.pkgd.min.js"></script>
+<script src="assets/js/owl.carousel.js"></script>
+<script src="assets/js/main.js"></script>
+</body>
+</html>
+<script language="JavaScript">
+    function ch_level(i)
+    {
+        var str = 'ann' + i;
+        var id = document.getElementById(str);
+        if ( i === 1 ) {
+            id.style.background = "#5f5d5d";
+            id.style.color = "#e5e5e5";
+            check_style(2);
+            check_style(3);
+        } else if ( i === 2 ) {
+            id.style.background = "#5f5d5d";
+            id.style.color = "#e5e5e5";
+            check_style(1);
+            check_style(3);
+        } else {
+            id.style.background = "#5f5d5d";
+            id.style.color = "#e5e5e5";
+            check_style(1);
+            check_style(2);
+        }
+    }
+
+    function check_style(k) {
+        var ids = 'ann' + k;
+        var s = document.getElementById(ids);
+        s.style.background = "#e5e5e5";
+        s.style.color = "#000";
+    }
+
+    function ch_date(i)
+    {
+        var str = 'ann' + i;
+        var id = document.getElementById(str);
+        if ( i === 4 ) {
+            id.style.background = "#5f5d5d";
+            id.style.color = "#e5e5e5";
+            check_date_style(5);
+            check_date_style(6);
+        } else if ( i === 5 ) {
+            id.style.background = "#5f5d5d";
+            id.style.color = "#e5e5e5";
+            check_date_style(4);
+            check_date_style(6);
+        } else {
+            id.style.background = "#5f5d5d";
+            id.style.color = "#e5e5e5";
+            check_date_style(4);
+            check_date_style(5);
+        }
+    }
+
+    function check_date_style(k) {
+        var ids = 'ann' + k;
+        var s = document.getElementById(ids);
+        s.style.background = "#5f5d5d";
+        s.style.color = "#deb30d";
+    }
+
+    function del() {
+        document.getElementById("query").value = "";
+    }
+    function recovery() {
+        alert("已恢复，初始密码为123456！");
+        window.location.href = "index.html";
+    }
+</script>

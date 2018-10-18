@@ -9,13 +9,14 @@ $config = [
     'components' => [
         'request' => [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
-            'cookieValidationKey' => '',
+            'cookieValidationKey' => 'hello',
         ],
         'cache' => [
             'class' => 'yii\caching\FileCache',
         ],
         'user' => [
-            'identityClass' => 'app\models\User',
+            //'identityClass' => 'app\models\User',
+            'identityClass' => 'app\models\WebMemberModel',
             'enableAutoLogin' => true,
         ],
         'errorHandler' => [
@@ -38,14 +39,13 @@ $config = [
             ],
         ],
         'db' => require(__DIR__ . '/db.php'),
-        /*
         'urlManager' => [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
+                "<controller:\w+>/<action:\w+>" => "<controller>/<action>", // 默认的访问路径的规则
             ],
         ],
-        */
     ],
     'params' => $params,
 ];
