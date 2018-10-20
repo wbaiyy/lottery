@@ -35,21 +35,21 @@ AppAsset::register($this);
             <div class="row">
                 <div class="col-md-4">
                     <div class="logo">
-                        <h2><a href="index.html" style="color: #fffdfd;">wmm008</a></h2>
+                        <h2><a href="<?= \yii\helpers\Url::to('/site/index')?>" style="color: #fffdfd;"><?=yii::$app->user->getIdentity()->loginname?></a></h2>
                     </div>
                 </div>
                 <div class="col-md-8">
                     <div id="menu" class="menu">
                         <ul>
-                            <li><a href="index.html" class="active">首页</a></li>
+                            <li><a href="<?= \yii\helpers\Url::to('/site/index')?>" class="active">首页</a></li>
                             <li><a href="<?= \yii\helpers\Url::to('/site/announcement')?>">公告</a></li>
-                            <li><a href="account.html">账号管理</a></li>
+                            <li><a href="<?= \yii\helpers\Url::to('/site/account')?>">账号管理</a></li>
                             <li><a onclick="notice();">报表</a></li>
-                            <li><a href="contact.html">联系我们</a></li>
+                            <li><a href="<?= \yii\helpers\Url::to('/site/contact')?>">联系我们</a></li>
                             <li><a onclick="notice();">在线客服</a></li>
                             <li><a onclick="recovery();">密码恢复</a></li>
-                            <li><a href="edit_passwd.html">更改密码</a></li>
-                            <li><a href="new_url.html">最新网址</a></li>
+                            <li><a href="<?= \yii\helpers\Url::to('/site/change-password')?>">更改密码</a></li>
+                            <li><a href="<?= \yii\helpers\Url::to('/site/newest-website')?>">最新网址</a></li>
                             <li><a href="<?= \yii\helpers\Url::to('/site/logout')?>">退出</a></li>
 
                         </ul>

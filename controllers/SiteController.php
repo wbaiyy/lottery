@@ -2,6 +2,9 @@
 
 namespace app\controllers;
 
+use app\models\ChangePasswordForm;
+use app\models\WebMarqueeModel;
+use app\models\WebMemberModel;
 use Yii;
 use yii\filters\AccessControl;
 use yii\web\Controller;
@@ -16,12 +19,16 @@ class SiteController extends Controller
         return [
             'access' => [
                 'class' => AccessControl::className(),
-                'only' => ['logout'],
                 'rules' => [
                     [
-                        'actions' => ['logout'],
+                        'actions' => [],
                         'allow' => true,
                         'roles' => ['@'],
+                    ],
+                    [
+                        'actions' => ['login'],
+                        'allow' => true,
+                        'roles' => ['?'],
                     ],
                 ],
             ],
@@ -99,6 +106,86 @@ class SiteController extends Controller
      */
     public function actionAnnouncement()
     {
-        return $this->render('announcement');
+        $announcementQuery = WebMarqueeModel::find()
+            ->where([
+                'level' => yii::$app->request->get('level', 4),
+            ]);
+        if ($ndate = yii::$app->request->get('ndate', 0)) {
+            $ndate = $ndate == 1 ? time() : strtotime("-1 day");
+            $announcementQuery->andFilterWhere([
+                'ndate' => date("Y-m-d",$ndate),
+            ]);
+        }
+
+        if ($message = yii::$app->request->get('message', '')) {
+            $announcementQuery->andFilterWhere([
+                ['or', "message={$message}", "message_tw={$message}", "message_en={$message}"]
+            ]);
+        }
+        $pageSize = intval(yii::$app->request->get('pageSize', '1'));
+        $pageNo = intval(yii::$app->request->get('pageNo', '10'));
+        $count = $announcementQuery->count();
+        $list = $announcementQuery
+            ->offset(($pageSize - 1) * $pageNo)->limit($pageNo)->asArray()->all();
+
+
+        return $this->render('announcement',[
+            'list' => $list,
+            'totalCount' => $count,
+        ]);
+    }
+
+    /**
+     * 帐号
+     *
+     * @return string
+     */
+    public function actionAccount()
+    {
+        return $this->render('account');
+    }
+
+    /**
+     * 详情设定
+     *
+     * @return string
+     */
+    public function actionAccountDetailSet()
+    {
+        return $this->render('account-detail-set');
+    }
+
+    /**
+     * 修改密码
+     *
+     * @return string
+     */
+    public function actionChangePassword()
+    {
+        $model = new ChangePasswordForm();
+        if (yii::$app->request->isPost) {
+            if ($model->load(yii::$app->request->post(), '') && $model->twicePasswordIsEqule()) {
+                $memberModel = WebMemberModel::findOne(yii::$app->user->id);
+                $memberModel->Passwd = $model->password;
+                if($memberModel->update()) {
+                    Yii::$app->getResponse()->redirect(Yii::$app->getHomeUrl());
+                }
+                $model->addErrors($memberModel->getErrors());
+            }
+        }
+
+        return $this->render('change-password', [
+            'model' => $model,
+        ]);
+    }
+
+    /**
+     * 最新网址
+     *
+     * @return string
+     */
+    public function  actionNewestWebsite()
+    {
+        return $this->render('newest-website');
     }
 }

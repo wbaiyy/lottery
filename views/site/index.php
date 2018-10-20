@@ -8,12 +8,12 @@ $this->title = 'My Agent';
 <div class="container">
     <hr>
     <div class="row">
-        <a href="announcement.html">
+        <a href="<?= \yii\helpers\Url::to('/site/announcement')?>">
             <div class="col-xs-6" align="center" style="background-color: #e5e5e5;border-right:2px solid #ffffff;">
                 <span class="glyphicon glyphicon-volume-up" style="color: #000;font-size: 60px;" aria-hidden="true"></span>
             </div>
         </a>
-        <a href="account.html">
+        <a href="<?= \yii\helpers\Url::to('/site/account')?>">
             <div class="col-xs-6" align="center" style="background-color: #e5e5e5;border-left:2px solid #ffffff;">
                 <span class="glyphicon glyphicon-user" style="color: #000;font-size: 60px;" aria-hidden="true"></span>
             </div>
@@ -33,7 +33,7 @@ $this->title = 'My Agent';
             </div>
         </a>
 
-        <a href="contact.html">
+        <a href="<?= \yii\helpers\Url::to('/site/contact')?>">
             <div class="col-xs-6" align="center" style="background-color: #e5e5e5;border-left:2px solid #ffffff;">
                 <span class="glyphicon glyphicon-earphone" style="color: #000;font-size: 60px;" aria-hidden="true"></span>
             </div>
@@ -53,7 +53,7 @@ $this->title = 'My Agent';
             </div>
         </a>
 
-        <a href="edit_passwd.html">
+        <a href="<?= \yii\helpers\Url::to('/site/change-password')?>">
             <div class="col-xs-6" align="center" style="background-color: #e5e5e5;border-left:2px solid #ffffff;">
                 <span class="glyphicon glyphicon-lock" style="color: #000;font-size: 60px;" aria-hidden="true"></span>
             </div>
@@ -67,13 +67,13 @@ $this->title = 'My Agent';
     </div>
     <hr>
     <div class="row">
-        <a href="new_url.html">
+        <a href="<?= \yii\helpers\Url::to('/site/newest-website')?>">
             <div class="col-xs-6" align="center" style="background-color: #e5e5e5;border-right:2px solid #ffffff;">
                 <span class="glyphicon glyphicon-link" style="color: #000;font-size: 60px;" aria-hidden="true"></span>
             </div>
         </a>
 
-        <a href="login.html">
+        <a href="<?= \yii\helpers\Url::to('/site/logout')?>">
             <div class="col-xs-6" align="center" style="background-color: #e5e5e5;border-left:2px solid #ffffff;">
                 <span class="glyphicon glyphicon-log-out" style="color: #000;font-size: 60px;" aria-hidden="true"></span>
             </div>

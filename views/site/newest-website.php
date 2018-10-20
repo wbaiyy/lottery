@@ -7,7 +7,7 @@
  */
 
 /* @var $this yii\web\View */
-$this->title = "联系我们";
+$this->title = "最新网址";
 
 $this->params['breadcrumbs'][] = $this->title;
 ?>
@@ -15,7 +15,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <div class="row clearfix">
         <div class="col-md-12 column">
             <div class="page-header">
-                <h4 style="color: white;">联系我们</h4>
+                <h4 style="color: #777;"><?=$this->title?></h4>
             </div>
             <div class="col-md-12 column">
                 <ul style="color: #777;padding-bottom: 20px;">

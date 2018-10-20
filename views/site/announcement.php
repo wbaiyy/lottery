@@ -7,6 +7,7 @@ $this->title = '公告';
 
 <div class="container">
     <div class="row" >
+        <!-- name=level 一般公告 1，重要公告 2 ，个人公告 3-->
         <div id="ann1" class="col-xs-4" align="center" style="background-color: #e5e5e5; color: #5f5d5d;" onclick="ch_level(1);">
             <span  align="center;">一般公告</span>
         </div>
@@ -18,6 +19,8 @@ $this->title = '公告';
         <div id="ann3" class="col-xs-4" align="center" style="background-color: #e5e5e5;color: #5f5d5d;" onclick="ch_level(3);">
             <span  align="center;">个人公告</span>
         </div>
+
+        <!-- name=ndate, 全部 0 1，今天 1 ，昨天 -1-->
         <div id="ann4" class="col-xs-4" align="center" style="background-color: #5f5d5d; color: #e5e5e5;" onclick="ch_date(4);">
             <span  align="center;">全部</span>
         </div>
@@ -32,7 +35,7 @@ $this->title = '公告';
                 <div class="form-group" align="center">
                     <input id="query" type="text" class="form-control" style="width:65%;float: left;"/>
                     <button type="submit" class="btn btn-default active disabled btn-info">搜索</button>
-                    <button type="button" class="btn btn-default active disabled btn-danger" onclick="del();">清楚</button>
+                    <button type="button" class="btn btn-default active disabled btn-danger" onclick="del();">清除</button>
                 </div>
             </form>
         </div>
@@ -40,27 +43,15 @@ $this->title = '公告';
 </div>
 <div class="container">
     <div class="row clearfix">
-        <div class="col-md-12 column">
-            <blockquote>
-                <p>
-                    公告公告公告公告公告公告公告公告公告公告.
-                </p> <small>2018-10-15</small>
-            </blockquote>
-        </div>
-        <div class="col-md-12 column">
-            <blockquote>
-                <p>
-                    公告公告公告公告公告公告公告公告公告公告.
-                </p> <small>2018-10-15</small>
-            </blockquote>
-        </div>
-        <div class="col-md-12 column">
-            <blockquote>
-                <p>
-                    公告公告公告公告公告公告公告公告公告公告.
-                </p> <small>2018-10-15</small>
-            </blockquote>
-        </div>
+        <?php foreach ($list as $item):?>
+            <div class="col-md-12 column">
+                <blockquote>
+                    <p>
+                        <?= $item['message']?>
+                    </p> <small><?= $item['ndate']?></small>
+                </blockquote>
+            </div>
+        <?php endforeach;?>
     </div>
 </div>
 <script language="JavaScript">

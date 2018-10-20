@@ -44,6 +44,7 @@ $config = [
             'showScriptName' => false,
             'rules' => [
                 "<controller:\w+>/<action:\w+>" => "<controller>/<action>", // 默认的访问路径的规则
+                "" => 'site/index',
             ],
         ],
     ],
