@@ -3,6 +3,7 @@
 namespace app\controllers;
 
 use app\models\ChangePasswordForm;
+use app\models\WebAgentsModel;
 use app\models\WebMarqueeModel;
 use app\models\WebMemberModel;
 use Yii;
@@ -152,7 +153,14 @@ class SiteController extends Controller
      */
     public function actionAccountDetailSet()
     {
-        return $this->render('account-detail-set');
+        $oid = yii::$app->request->get('oid', '');
+        $agents = WebAgentsModel::find()->where([
+            'oid' => $oid,
+        ])->asArray()->one();
+
+        return $this->render('account-detail-set', [
+            'model' => $agents,
+        ]);
     }
 
     /**
