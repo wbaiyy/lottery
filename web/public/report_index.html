@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>agent</title>
+    <link href='https://fonts.googleapis.com/css?family=Quicksand:400,700|Quattrocento+Sans:400,700|Palanquin:400,600|Raleway|Josefin+Sans' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="assets/css/font-awesome.css">
+    <link rel="stylesheet" href="assets/css/owl.carousel.css">
+    <link rel="stylesheet" href="assets/css/owl.theme.css">
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/mobile.css">
+</head>
+<body>
+
+<header style="background: #950f0f;">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="logo">
+                    <h2><a href="index.html" style="color: #fffdfd;">wmm008</a></h2>
+                </div>
+            </div>
+            <div class="col-md-8">
+                <div id="menu" class="menu">
+                    <ul>
+                        <li><a href="index.html" class="active">首页</a></li>
+                        <li><a href="announcement.html">公告</a></li>
+                        <li><a href="account.html">账号管理</a></li>
+                        <li><a onclick="anotice();">报表</a></li>
+                        <li><a href="contact.html">联系我们</a></li>
+                        <li><a onclick="anotice();">在线客服</a></li>
+                        <li><a onclick="recovery();">密码恢复</a></li>
+                        <li><a href="edit_passwd.html">更改密码</a></li>
+                        <li><a href="new_url.html">最新网址</a></li>
+                        <li><a href="login.html">退出</a></li>
+
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+<div class="container">
+    <div class="row clearfix">
+        <div class="col-md-12 column">
+            <div data-role="content" class="ACC ui-content" role="main">
+                <a href="report_result.html" data-role="button" data-theme="a" data-corners="false" data-shadow="true" data-iconshadow="true" data-wrapperels="span" class="ui-btn ui-btn-up-a ui-shadow"><span class="ui-btn-inner"><span class="ui-btn-text">赛事结果概要</span></span></a>
+                <a href=report_sheet.html" data-role="button" data-theme="a" data-corners="false" data-shadow="true" data-iconshadow="true" data-wrapperels="span" class="ui-btn ui-btn-up-a ui-shadow"><span class="ui-btn-inner"><span class="ui-btn-text">月帐期数表</span></span></a>
+                <a href="report_settled.html" data-role="button" data-theme="a" data-corners="false" data-shadow="true" data-iconshadow="true" data-wrapperels="span" class="ui-btn ui-btn-up-a ui-shadow"><span class="ui-btn-inner"><span class="ui-btn-text">有结果报表</span></span></a>
+                <a href="report_un_settled.html" data-role="button" data-theme="a" data-corners="false" data-shadow="true" data-iconshadow="true" data-wrapperels="span" class="ui-btn ui-btn-up-a ui-shadow"><span class="ui-btn-inner"><span class="ui-btn-text">未有结果报表</span></span></a>
+
+            </div>
+        </div>
+    </div>
+</div>
+<script src="assets/js/jquery-2.1.4.js"></script>
+<script src="assets/js/bootstrap.min.js"></script>
+<script src="assets/js/jquery.slicknav.js"></script>
+<script src="assets/js/isotope.pkgd.min.js"></script>
+<script src="assets/js/owl.carousel.js"></script>
+<script src="assets/js/main.js"></script>
+</body>
+</html>
+<script>
+    function anotice() {
+        alert("该功能即将上线，敬请期待！");
+        return false;
+    }
+    function recovery() {
+        alert("已恢复，初始密码为123456！");
+        window.location.href = "index.html";
+    }
+</script>

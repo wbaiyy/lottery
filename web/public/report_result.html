@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>agent</title>
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/mobile.css">
+    <link rel="stylesheet" href="assets/css/theme_tw.css">
+</head>
+<body>
+
+<header style="background: #950f0f;">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="logo">
+                    <h2><a href="index.html" style="color: #fffdfd;">wmm008</a></h2>
+                </div>
+            </div>
+            <div class="col-md-8">
+                <div id="menu" class="menu">
+                    <ul>
+                        <li><a href="index.html" class="active">首页</a></li>
+                        <li><a href="announcement.html">公告</a></li>
+                        <li><a href="account.html">账号管理</a></li>
+                        <li><a onclick="anotice();">报表</a></li>
+                        <li><a href="contact.html">联系我们</a></li>
+                        <li><a onclick="anotice();">在线客服</a></li>
+                        <li><a onclick="recovery();">密码恢复</a></li>
+                        <li><a href="edit_passwd.html">更改密码</a></li>
+                        <li><a href="new_url.html">最新网址</a></li>
+                        <li><a href="login.html">退出</a></li>
+
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+<div class="container">
+    <div class="row clearfix">
+        <div class="col-md-12 column">
+            <div data-role="content" class="MAIN REPORT ui-content" role="main">
+                <header>
+                    <nav>
+                        <ul>
+                            <form class="form-horizontal" role="form" action="#" method="post">
+                            <input type="hidden" name="searchDate" id="searchData" value="" />
+                            <li class="h"><a rel="external" class="home" href="#" id="conf_yesterday">2018-10-21</a></li>
+                            <li><a rel="external" class="brewery" href="#" id="conf_today">2018-10-22</a></li>
+                            </form>
+                        </ul>
+                    </nav>
+                </header>
+                <h4 id="report_tode" class="report_tode"><span id="msg_day">2018-10-21 (昨日)</span></h4>
+                <h5 id="report_finish" class="report_finish" style="">完成</h5>
+
+
+                <div id="yesterday_div" style="">
+                    <table border="0" cellspacing="0" cellpadding="0" class="comm_tab noborder list_color1"><tbody><tr class="tha"><th class="td40">
+                    </th><th class="td30">有结果</th>
+                        <th class="td30">未有结果</th>
+                    </tr><tr><td class="result_left">足球</td>
+                        <td id="FT_yesterday_1">1091</td>
+                        <td id="FT_yesterday_2">0</td>
+                    </tr><tr><td class="result_left">篮球</td>
+                        <td id="BK_yesterday_1">288</td>
+                        <td id="BK_yesterday_2">0</td>
+                    </tr><tr><td class="result_left">网球</td>
+                        <td id="TN_yesterday_1">28</td>
+                        <td id="TN_yesterday_2">0</td>
+                    </tr><tr><td class="result_left">排球</td>
+                        <td id="VB_yesterday_1">26</td>
+                        <td id="VB_yesterday_2">0</td>
+                    </tr><tr><td class="result_left">羽毛球</td>
+                        <td id="BM_yesterday_1">5</td>
+                        <td id="BM_yesterday_2">0</td>
+                    </tr><tr><td class="result_left">乒乓球</td>
+                        <td id="TT_yesterday_1">4</td>
+                        <td id="TT_yesterday_2">0</td>
+                    </tr><tr><td class="result_left">棒球</td>
+                        <td id="BS_yesterday_1">1</td>
+                        <td id="BS_yesterday_2">0</td>
+                    </tr><tr><td class="result_left">其他球类</td>
+                        <td id="OP_yesterday_1">139</td>
+                        <td id="OP_yesterday_2">0</td>
+                    </tr><tr><td class="result_left">冠军</td>
+                        <td id="FS_yesterday_1">144</td>
+                        <td id="FS_yesterday_2">0</td>
+                    </tr><tr><td class="result_left">台球</td>
+                        <td id="SK_yesterday_1">2</td>
+                        <td id="SK_yesterday_2">0</td>
+                    </tr></tbody></table></div>
+
+
+
+                <div id="today_div" style="display: none;">
+                    <table border="0" cellspacing="0" cellpadding="0" class="comm_tab noborder list_color1"><tbody><tr class="tha"><th class="td40">
+                    </th><th class="td30">有结果</th>
+                        <th class="td30">未有结果</th>
+                    </tr><tr><td class="result_left">足球</td>
+                        <td id="FT_today_1">87</td>
+                        <td id="FT_today_2">205</td>
+                    </tr><tr><td class="result_left">篮球</td>
+                        <td id="BK_today_1">8</td>
+                        <td id="BK_today_2">96</td>
+                    </tr><tr><td class="result_left">网球</td>
+                        <td id="TN_today_1">24</td>
+                        <td id="TN_today_2">70</td>
+                    </tr><tr><td class="result_left">排球</td>
+                        <td id="VB_today_1">9</td>
+                        <td id="VB_today_2">4</td>
+                    </tr><tr><td class="result_left">羽毛球</td>
+                        <td id="BM_today_1">0</td>
+                        <td id="BM_today_2">0</td>
+                    </tr><tr><td class="result_left">乒乓球</td>
+                        <td id="TT_today_1">0</td>
+                        <td id="TT_today_2">0</td>
+                    </tr><tr><td class="result_left">棒球</td>
+                        <td id="BS_today_1">1</td>
+                        <td id="BS_today_2">0</td>
+                    </tr><tr><td class="result_left">其他球类</td>
+                        <td id="OP_today_1">8</td>
+                        <td id="OP_today_2">31</td>
+                    </tr><tr><td class="result_left">冠军</td>
+                        <td id="FS_today_1">0</td>
+                        <td id="FS_today_2">18</td>
+                    </tr><tr><td class="result_left">台球</td>
+                        <td id="SK_today_1">0</td>
+                        <td id="SK_today_2">0</td>
+                    </tr></tbody></table></div>
+
+
+                <div id="edit_bar" class="repor_edit_bar">
+                    <a href="./?=/report_index.html" id="back_report" class="del_acc ui-btn ui-btn-up-a ui-shadow" data-theme="a" data-role="button" data-corners="false" data-shadow="true" data-iconshadow="true" data-wrapperels="span"><span class="ui-btn-inner"><span class="ui-btn-text">报表首页</span></span></a>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+<script src="assets/js/jquery-2.1.4.js"></script>
+<script src="assets/js/bootstrap.min.js"></script>
+<script src="assets/js/jquery.slicknav.js"></script>
+<script src="assets/js/isotope.pkgd.min.js"></script>
+<script src="assets/js/owl.carousel.js"></script>
+<script src="assets/js/main.js"></script>
+</body>
+</html>
+<style>
+    body {
+       color: #7b7b7b;
+    }
+    .h {
+        width: 50%;
+        float: left;
+        margin: 0;
+        padding: 0;
+        list-style-type: none;
+        border-right-color: #FFF!important;
+    }
+</style>
+<script>
+    $(document).ready(function(){
+        //时间转化
+        var formatDate = function (date) {
+            var y = date.getFullYear();
+            var m = date.getMonth() + 1;
+            m = m < 10 ? '0' + m : m;
+            var d = date.getDate();
+            d = d < 10 ? ('0' + d) : d;
+            return y + '-' + m + '-' + d;
+        }
+        curDate = new Date();
+        var preDate = new Date(curDate.getTime() - 24*60*60*1000);
+        var today = new Date(curDate.getTime());
+        $("#conf_yesterday").html(formatDate(preDate));
+        $("#conf_today").html(formatDate(today));
+
+    })
+    $("#conf_yesterday").click(function(){
+        var id = document.getElementById("searchData");
+        //时间转化
+        var formatDate = function (date) {
+            var y = date.getFullYear();
+            var m = date.getMonth() + 1;
+            m = m < 10 ? '0' + m : m;
+            var d = date.getDate();
+            d = d < 10 ? ('0' + d) : d;
+            return y + '-' + m + '-' + d;
+        }
+        curDate = new Date();
+        var preDate = new Date(curDate.getTime() - 24*60*60*1000);
+        id.value = formatDate(preDate);
+        $("#conf_today").parent().removeClass("h");
+        $("#conf_today").removeClass("home");
+        $("#conf_today").addClass("brewery");
+        $("#conf_yesterday").parent().addClass("h")
+        $("#conf_yesterday").removeClass("brewery")
+        $("#conf_yesterday").addClass("home");
+    })
+
+    $("#conf_today").click(function(){
+        curDate = new Date();
+        //时间转化
+        var formatDate = function (date) {
+            var y = date.getFullYear();
+            var m = date.getMonth() + 1;
+            m = m < 10 ? '0' + m : m;
+            var d = date.getDate();
+            d = d < 10 ? ('0' + d) : d;
+            return y + '-' + m + '-' + d;
+        }
+        var preDate = new Date(curDate.getTime());
+        var id = document.getElementById("searchData");
+        id.value = formatDate(curDate);;
+        $("#conf_yesterday").parent().removeClass("h");
+        $("#conf_yesterday").removeClass("home");
+        $("#conf_yesterday").addClass("brewery");
+        $("#conf_today").parent().addClass("h")
+        $("#conf_today").removeClass("brewery")
+        $("#conf_today").addClass("home");
+    })
+
+    function anotice() {
+        alert("该功能即将上线，敬请期待！");
+        return false;
+    }
+    function recovery() {
+        alert("已恢复，初始密码为123456！");
+        window.location.href = "index.html";
+    }
+</script>
