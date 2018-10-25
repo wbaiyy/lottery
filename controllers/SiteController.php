@@ -2,12 +2,21 @@
 
 namespace app\controllers;
 
+use app\models\BaseballModel;
+use app\models\BaskMatchModel;
 use app\models\ChangePasswordForm;
+use app\models\FootMatchModel;
+use app\models\OtherPlayModel;
+use app\models\SpMatchModel;
+use app\models\TennisModel;
+use app\models\VolleyballModel;
 use app\models\WebAgentsModel;
 use app\models\WebMarqueeModel;
 use app\models\WebMemberModel;
 use Yii;
+use yii\db\Expression;
 use yii\filters\AccessControl;
+use yii\helpers\Url;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
 use app\models\LoginForm;
@@ -195,5 +204,238 @@ class SiteController extends Controller
     public function  actionNewestWebsite()
     {
         return $this->render('newest-website');
+    }
+
+    /**
+     * 报表
+     *
+     * @return string
+     */
+    public function  actionReport()
+    {
+        return $this->render('report');
+    }
+
+    /**
+     * 报表:赛事结果
+     *
+     * @return string
+     */
+    public function actionReportResult()
+    {
+        $today = date('Y-m-d');
+        $yesterday = date('Y-m-d', strtotime('-1 day'));
+        $tomorrow = date('Y-m-d', strtotime('1 day'));
+
+        $result = [];
+        //没有结果
+        $ftTodayNoResult = FootMatchModel::find()
+            ->where(['between', 'm_start', $today, $tomorrow])
+            ->andWhere(new Expression('mid%2=1'))
+            ->andWhere(['MB_Inball' => ''])
+            ->count();
+        //有结果
+        $ftTodayResult = FootMatchModel::find()
+            ->where(['between', 'm_start', $today, $tomorrow])
+            ->andWhere(new Expression('mid%2=1'))
+            ->andWhere(['!=', 'MB_Inball', ''])
+            ->count();
+
+        //没有结果
+        $ftYesterdayNoResult = FootMatchModel::find()
+            ->where(['between', 'm_start', $yesterday, $today])
+            ->andWhere(new Expression('mid%2=1'))
+            ->andWhere(['MB_Inball' => ''])
+            ->count();
+        //有结果
+        $ftYesterdayResult = FootMatchModel::find()
+            ->where(['between', 'm_start', $yesterday, $today])
+            ->andWhere(new Expression('mid%2=1'))
+            ->andWhere(['!=', 'MB_Inball', ''])
+            ->count();
+        $result['yesterday']['ft'] = [
+            $ftYesterdayResult,
+            $ftYesterdayNoResult,
+        ];
+
+        $result['today']['ft'] = [
+            $ftTodayResult,
+            $ftTodayNoResult,
+        ];
+
+
+        //有结果
+        $bsYesterdayResult = BaskMatchModel::find()
+            ->where("mb_mid<100000")
+            ->andWhere(['!=', 'MB_Inball', ''])
+            ->where(['between', 'm_start', $yesterday, $today])
+            ->count();
+        $bsYesterdayNoResult = BaskMatchModel::find()
+            ->where("mb_mid<100000")
+            ->andWhere(['=', 'MB_Inball', ''])
+            ->where(['between', 'm_start', $yesterday, $today])
+            ->count();
+        $bsTodayResult = BaskMatchModel::find()
+            ->where("mb_mid<100000")
+            ->andWhere(['!=', 'MB_Inball', ''])
+            ->where(['between', 'm_start', $today, $tomorrow])
+            ->count();
+        $bsTodayNoResult = BaskMatchModel::find()
+            ->where("mb_mid<100000")
+            ->andWhere(['=', 'MB_Inball', ''])
+            ->where(['between', 'm_start', $today, $tomorrow])
+            ->count();
+
+        $result['yesterday']['bs'] = [
+            $bsYesterdayResult,
+            $bsYesterdayNoResult,
+        ];
+        $result['today']['bs'] = [
+            $bsTodayResult,
+            $bsTodayNoResult,
+        ];
+
+
+        $tsTodayResult = TennisModel::find()
+            ->where(['!=', "MB_Inball", ''])
+            ->andWhere(['between', 'm_start', $today, $tomorrow])
+            ->count();
+        $tsTodayNoResult = TennisModel::find()
+            ->where(['=', "MB_Inball", ''])
+            ->andWhere(['between', 'm_start', $today, $tomorrow])
+            ->count();
+        $tsYesterdayResult = TennisModel::find()
+            ->where(['!=', "MB_Inball", ''])
+            ->andWhere(['between', 'm_start', $yesterday, $today])
+            ->count();
+        $tsYesterdayNoResult = TennisModel::find()
+            ->where(['=', "MB_Inball", ''])
+            ->andWhere(['between', 'm_start', $yesterday, $today])
+            ->count();
+        $result['yesterday']['ts'] = [
+            $tsYesterdayResult,
+            $tsYesterdayNoResult,
+        ];
+        $result['today']['ts'] = [
+            $tsTodayResult,
+            $tsTodayNoResult,
+        ];
+
+        $voTodayResult = VolleyballModel::find()
+            ->where(['!=', "MB_Inball", ''])
+            ->andWhere(['between', 'm_start', $today, $tomorrow])
+            ->count();
+        $voTodayNoResult = VolleyballModel::find()
+            ->where(['=', "MB_Inball", ''])
+            ->andWhere(['between', 'm_start', $today, $tomorrow])
+            ->count();
+        $voYesterdayResult = VolleyballModel::find()
+            ->where(['!=', "MB_Inball", ''])
+            ->andWhere(['between', 'm_start', $yesterday, $today])
+            ->count();
+        $voYesterdayNoResult = VolleyballModel::find()
+            ->where(['=', "MB_Inball", ''])
+            ->andWhere(['between', 'm_start', $yesterday, $today])
+            ->count();
+        $result['yesterday']['vo'] = [
+            $voYesterdayResult,
+            $voYesterdayNoResult,
+        ];
+        $result['today']['vo'] = [
+            $voTodayResult,
+            $voTodayNoResult,
+        ];
+
+        $bbTodayResult = BaseballModel::find()
+            ->where(['!=', "MB_Inball", ''])
+            ->andWhere(['between', 'm_start', $today, $tomorrow])
+            ->count();
+        $bbTodayNoResult = BaseballModel::find()
+            ->where(['=', "MB_Inball", ''])
+            ->andWhere(['between', 'm_start', $today, $tomorrow])
+            ->count();
+        $bbYesterdayResult = BaseballModel::find()
+            ->where(['!=', "MB_Inball", ''])
+            ->andWhere(['between', 'm_start', $yesterday, $today])
+            ->count();
+        $bbYesterdayNoResult = BaseballModel::find()
+            ->where(['=', "MB_Inball", ''])
+            ->andWhere(['between', 'm_start', $yesterday, $today])
+            ->count();
+        $result['yesterday']['bb'] = [
+            $bbYesterdayResult,
+            $bbYesterdayNoResult,
+        ];
+        $result['today']['bb'] = [
+            $bbTodayResult,
+            $bbTodayNoResult,
+        ];
+
+        $spTodayResult = SpMatchModel::find()
+            ->where('QQ526738=1')
+            ->andWhere(['between', 'mstart', $today, $tomorrow])
+            ->count();
+        $spTodayNoResult = SpMatchModel::find()
+            ->where('QQ526738=0')
+            ->andWhere(['between', 'mstart', $today, $tomorrow])
+            ->count();
+        $spYesterdayResult = SpMatchModel::find()
+            ->where('QQ526738=1')
+            ->andWhere(['between', 'mstart', $yesterday, $today])
+            ->count();
+        $spYesterdayNoResult = SpMatchModel::find()
+            ->where('QQ526738=0')
+            ->andWhere(['between', 'mstart', $yesterday, $today])
+            ->count();
+        $result['yesterday']['sp'] = [
+            $spTodayResult,
+            $spTodayNoResult,
+        ];
+        $result['today']['sp'] = [
+            $spYesterdayResult,
+            $spYesterdayNoResult,
+        ];
+
+        $opTodayResult = OtherPlayModel::find()
+            ->where(['!=', "MB_Inball", ''])
+            ->andWhere(['between', 'm_start', $today, $tomorrow])
+            ->count();
+        $opTodayNoResult = OtherPlayModel::find()
+            ->where(['=', "MB_Inball", ''])
+            ->andWhere(['between', 'm_start', $today, $tomorrow])
+            ->count();
+        $opYesterdayResult = OtherPlayModel::find()
+            ->where(['!=', "MB_Inball", ''])
+            ->andWhere(['between', 'm_start', $yesterday, $today])
+            ->count();
+        $opYesterdayNoResult = OtherPlayModel::find()
+            ->where(['=', "MB_Inball", ''])
+            ->andWhere(['between', 'm_start', $yesterday, $today])
+            ->count();
+        $result['yesterday']['op'] = [
+            $opYesterdayResult,
+            $opYesterdayNoResult,
+        ];
+        $result['today']['op'] = [
+            $opTodayResult,
+            $opTodayNoResult,
+        ];
+
+
+        return $this->render('report-result', [
+            'result' => $result,
+        ]);
+    }
+
+    /**
+     *
+     *
+     */
+    public function actionRecoveryPassword()
+    {
+        $member = WebMemberModel::findOne(yii::$app->user->identity->id);
+        $member->Passwd = '123456';
+        $member->save();
+        yii::$app->response->redirect(Url::to('/site/index'));
     }
 }

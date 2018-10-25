@@ -27,7 +27,7 @@ $this->title = 'My Agent';
     </div>
     <hr>
     <div class="row">
-        <a onclick="notice();">
+        <a href="<?= \yii\helpers\Url::to('/site/report')?>">
             <div class="col-xs-6" align="center" style="background-color: #e5e5e5;border-right:2px solid #ffffff;">
                 <span class="glyphicon glyphicon-list-alt" style="color: #000;font-size: 60px;" aria-hidden="true"></span>
             </div>

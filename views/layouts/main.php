@@ -44,7 +44,7 @@ AppAsset::register($this);
                             <li><a href="<?= \yii\helpers\Url::to('/site/index')?>" class="active">首页</a></li>
                             <li><a href="<?= \yii\helpers\Url::to('/site/announcement')?>">公告</a></li>
                             <li><a href="<?= \yii\helpers\Url::to('/site/account')?>">账号管理</a></li>
-                            <li><a onclick="notice();">报表</a></li>
+                            <li><a href="<?= \yii\helpers\Url::to('/site/report')?>">报表</a></li>
                             <li><a href="<?= \yii\helpers\Url::to('/site/contact')?>">联系我们</a></li>
                             <li><a onclick="notice();">在线客服</a></li>
                             <li><a onclick="recovery();">密码恢复</a></li>
@@ -86,8 +86,11 @@ AppAsset::register($this);
     }
     function recovery() {
         alert("已恢复，初始密码为123456！");
-        window.location.href = "index.html";
+        window.location.href = "<?= \yii\helpers\Url::to('/site/recovery-password') ?>";
     }
 </script>
+<?php if(isset($this->blocks['footer']) == true):?>
+    <?= $this->blocks['footer'] ?>
+<?php endif;?>
 </html>
 <?php $this->endPage() ?>

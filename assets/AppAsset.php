@@ -26,6 +26,7 @@ class AppAsset extends AssetBundle
         'lotteryAssets/css/owl.theme.css',
         'lotteryAssets/css/style.css',
         'lotteryAssets/css/theme_tw.css',
+        'lotteryAssets/css/mobile.css',
     ];
     public $js = [
         'lotteryAssets/js/bootstrap.min.js',
