@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>agent</title>
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/mobile.css">
+    <link rel="stylesheet" href="assets/css/theme_tw.css">
+</head>
+<body>
+
+<header style="background: #950f0f;">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="logo">
+                    <h2><a href="index.html" style="color: #fffdfd;">wmm008</a></h2>
+                </div>
+            </div>
+            <div class="col-md-8">
+                <div id="menu" class="menu">
+                    <ul>
+                        <li><a href="index.html" class="active">首页</a></li>
+                        <li><a href="announcement.html">公告</a></li>
+                        <li><a href="account.html">账号管理</a></li>
+                        <li><a onclick="anotice();">报表</a></li>
+                        <li><a href="contact.html">联系我们</a></li>
+                        <li><a onclick="anotice();">在线客服</a></li>
+                        <li><a onclick="recovery();">密码恢复</a></li>
+                        <li><a href="edit_passwd.html">更改密码</a></li>
+                        <li><a href="new_url.html">最新网址</a></li>
+                        <li><a href="login.html">退出</a></li>
+
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+<div class="container">
+    <div class="row clearfix">
+        <div class="col-md-12 column">
+            <div data-role="content" class="MAIN REPORT ui-content" role="main">
+                <h4>有结果报表</h4>
+                <div data-role="content" class="REPORT ui-content" role="main">
+                    <ul data-role="listview" class="report_list ui-listview"><li class="ui-li ui-li-static ui-btn-up-c ui-li-has-count">笔数:      	<span id="WCOUNT_A0" class="ui-li-count ui-btn-up-c ui-btn-corner-all">0</span></li>
+                        <li class="ui-li ui-li-static ui-btn-up-c ui-li-has-count">下注金额	<span id="GOLD_A0" class="ui-li-count ui-btn-up-c ui-btn-corner-all">0</span></li>
+                        <li class="ui-li ui-li-static ui-btn-up-c ui-li-has-count">有效金额	<span id="VGOLD_A0" class="ui-li-count ui-btn-up-c ui-btn-corner-all">0</span></li>
+                        <li class="ui-li ui-li-static ui-btn-up-c ui-li-has-count">会员		<span id="MWINGOLD_A0" class="ui-li-count ui-btn-up-c ui-btn-corner-all">0</span></li>
+                        <li class="ui-li ui-li-static ui-btn-up-c ui-li-has-count">代理商		<span id="AWINGOLD_A0" class="ui-li-count ui-btn-up-c ui-btn-corner-all">0</span></li>
+                        <li class="ui-li ui-li-static ui-btn-up-c ui-li-has-count">代理商占成	<span id="WINLOSS0" class="ui-li-count ui-btn-up-c ui-btn-corner-all">0</span></li>
+                        <li class="ui-li ui-li-static ui-btn-up-c ui-li-has-count">代理商结果	<span id="ARESULT_A0" class="ui-li-count ui-btn-up-c ui-btn-corner-all">0</span></li>
+                        <li class="ui-li ui-li-static ui-btn-up-c ui-li-has-count">代理商币值		<span id="RESULT_D0" class="ui-li-count ui-btn-up-c ui-btn-corner-all">0</span></li>
+                        <li class="ui-li ui-li-static ui-btn-up-c ui-li-has-count ui-li-last">代理商实货量		<span id="SGOLD_A0" class="ui-li-count ui-btn-up-c ui-btn-corner-all">0</span></li>
+                    </ul>
+                </div>
+                </div>
+                <div id="edit_bar" class="repor_edit_bar">
+                    <a href="./?=/report_index.html" id="back_report" class="del_acc ui-btn ui-btn-up-a ui-shadow" data-theme="a" data-role="button" data-corners="false" data-shadow="true" data-iconshadow="true" data-wrapperels="span"><span class="ui-btn-inner"><span class="ui-btn-text">报表首页</span></span></a>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+<script src="assets/js/jquery-2.1.4.js"></script>
+<script src="assets/js/bootstrap.min.js"></script>
+<script src="assets/js/jquery.slicknav.js"></script>
+<script src="assets/js/isotope.pkgd.min.js"></script>
+<script src="assets/js/owl.carousel.js"></script>
+<script src="assets/js/main.js"></script>
+</body>
+</html>
+<style>
+    body {
+        color: #7b7b7b;
+    }
+    .h {
+        width: 50%;
+        float: left;
+        margin: 0;
+        padding: 0;
+        list-style-type: none;
+        border-right-color: #FFF!important;
+    }
+</style>
+<script>
+    $(document).ready(function(){
+        //时间转化
+        var formatDate = function (date) {
+            var y = date.getFullYear();
+            return y;
+        }
+        curDate = new Date();
+        var preDate = new Date(curDate.getTime() - 24*60*60*1000*365);
+        var today = new Date(curDate.getTime());
+        $("#conf_yesterday").html(formatDate(preDate));
+        $("#conf_today").html(formatDate(today));
+
+    })
+    $("#conf_yesterday").click(function(){
+        var id = document.getElementById("searchData");
+        //时间转化
+        var formatDate = function (date) {
+            var y = date.getFullYear();
+            return y;
+        }
+        curDate = new Date();
+        var preDate = new Date(curDate.getTime() - 24*60*60*1000*365);
+        id.value = formatDate(preDate);
+        $("#conf_today").parent().removeClass("h");
+        $("#conf_today").removeClass("home");
+        $("#conf_today").addClass("brewery");
+        $("#conf_yesterday").parent().addClass("h")
+        $("#conf_yesterday").removeClass("brewery")
+        $("#conf_yesterday").addClass("home");
+    })
+
+    $("#conf_today").click(function(){
+        curDate = new Date();
+        //时间转化
+        var formatDate = function (date) {
+            var y = date.getFullYear();
+            return y;
+        }
+        var preDate = new Date(curDate.getTime());
+        var id = document.getElementById("searchData");
+        id.value = formatDate(curDate);;
+        $("#conf_yesterday").parent().removeClass("h");
+        $("#conf_yesterday").removeClass("home");
+        $("#conf_yesterday").addClass("brewery");
+        $("#conf_today").parent().addClass("h")
+        $("#conf_today").removeClass("brewery")
+        $("#conf_today").addClass("home");
+    })
+
+    function anotice() {
+        alert("该功能即将上线，敬请期待！");
+        return false;
+    }
+    function recovery() {
+        alert("已恢复，初始密码为123456！");
+        window.location.href = "index.html";
+    }
+</script>

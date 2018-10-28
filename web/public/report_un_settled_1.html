@@ -4,13 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>agent</title>
-    <link href='https://fonts.googleapis.com/css?family=Quicksand:400,700|Quattrocento+Sans:400,700|Palanquin:400,600|Raleway|Josefin+Sans' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" href="assets/css/font-awesome.css">
-    <link rel="stylesheet" href="assets/css/owl.carousel.css">
-    <link rel="stylesheet" href="assets/css/owl.theme.css">
     <link rel="stylesheet" href="assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="assets/css/style.css">
     <link rel="stylesheet" href="assets/css/mobile.css">
+    <link rel="stylesheet" href="assets/css/theme_tw.css">
 </head>
 <body>
 
@@ -45,15 +42,28 @@
 <div class="container">
     <div class="row clearfix">
         <div class="col-md-12 column">
-            <div data-role="content" class="ACC ui-content" role="main">
-                <a href="report_result.html" data-role="button" data-theme="a" data-corners="false" data-shadow="true" data-iconshadow="true" data-wrapperels="span" class="ui-btn ui-btn-up-a ui-shadow"><span class="ui-btn-inner"><span class="ui-btn-text">赛事结果概要</span></span></a>
-                <a href="report_sheet.html" data-role="button" data-theme="a" data-corners="false" data-shadow="true" data-iconshadow="true" data-wrapperels="span" class="ui-btn ui-btn-up-a ui-shadow"><span class="ui-btn-inner"><span class="ui-btn-text">月帐期数表</span></span></a>
-                <a href="report_settled.html" data-role="button" data-theme="a" data-corners="false" data-shadow="true" data-iconshadow="true" data-wrapperels="span" class="ui-btn ui-btn-up-a ui-shadow"><span class="ui-btn-inner"><span class="ui-btn-text">有结果报表</span></span></a>
-                <a href="report_un_settled.html" data-role="button" data-theme="a" data-corners="false" data-shadow="true" data-iconshadow="true" data-wrapperels="span" class="ui-btn ui-btn-up-a ui-shadow"><span class="ui-btn-inner"><span class="ui-btn-text">未有结果报表</span></span></a>
+            <div data-role="content" class="MAIN REPORT ui-content" role="main">
+                <h4>无结果报表</h4>
+                <div data-role="content" class="REPORT ui-content" role="main">
 
+                    <div id="sub_message" class="sub_message" style="display:none">您的子帐号已被选择观看部分的帐号，帐目只显示
+                        <span id="sub_num" class="sub_num">0</span>/<span id="total_num" class="total_num">0</span>个帐号。
+                    </div>
+
+                    <ul data-role="listview" class="report_list ui-listview"><li class="ui-li ui-li-static ui-btn-up-c ui-li-has-count">笔数:      	<span id="WCOUNT_A0" class="ui-li-count ui-btn-up-c ui-btn-corner-all">0</span></li>
+                        <li class="ui-li ui-li-static ui-btn-up-c ui-li-has-count ui-li-last">下注金额:   <span id="GOLD_A0" class="ui-li-count ui-btn-up-c ui-btn-corner-all">0</span></li>
+                    </ul>
+                </div>
+
+                </div>
             </div>
+            <div id="edit_bar" class="repor_edit_bar">
+                <a href="./?=/report_index.html" id="back_report" class="del_acc ui-btn ui-btn-up-a ui-shadow" data-theme="a" data-role="button" data-corners="false" data-shadow="true" data-iconshadow="true" data-wrapperels="span"><span class="ui-btn-inner"><span class="ui-btn-text">报表首页</span></span></a>
+            </div>
+
         </div>
     </div>
+</div>
 </div>
 <script src="assets/js/jquery-2.1.4.js"></script>
 <script src="assets/js/bootstrap.min.js"></script>
@@ -63,13 +73,17 @@
 <script src="assets/js/main.js"></script>
 </body>
 </html>
-<script>
-    function anotice() {
-        alert("该功能即将上线，敬请期待！");
-        return false;
+<style>
+    body {
+        color: #7b7b7b;
     }
-    function recovery() {
-        alert("已恢复，初始密码为123456！");
-        window.location.href = "index.html";
+    .h {
+        width: 50%;
+        float: left;
+        margin: 0;
+        padding: 0;
+        list-style-type: none;
+        border-right-color: #FFF!important;
     }
-</script>
+</style>
+
