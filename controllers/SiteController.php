@@ -156,6 +156,16 @@ class SiteController extends Controller
     }
 
     /**
+     * 子帐号
+     *
+     * @return string
+     */
+    public function actionAccountSubList()
+    {
+        return $this->render('account-sub-list');
+    }
+    
+    /**
      * 详情设定
      *
      * @return string
@@ -428,8 +438,9 @@ class SiteController extends Controller
     }
 
     /**
-     *
-     *
+     * 恢复密码
+     * 
+     * @return string
      */
     public function actionRecoveryPassword()
     {
@@ -437,5 +448,38 @@ class SiteController extends Controller
         $member->Passwd = '123456';
         $member->save();
         yii::$app->response->redirect(Url::to('/site/index'));
+    }
+    
+    /**
+     * 月帐期数表
+     * 
+     * @return string
+     */
+    public function actionReportSheet()
+    {
+        return $this->render('report-sheet', [
+        ]);
+    }
+    
+    /**
+     * 有结果报表
+     * 
+     * @return string
+     */
+    public function actionReportSettled()
+    {
+        return $this->render('report-settled', [
+        ]);
+    }
+    
+    /**
+     * 无结果报表
+     * 
+     * @return string
+     */
+    public function actionReportUnSettled()
+    {
+        return $this->render('report-un-settled', [
+        ]);
     }
 }
