@@ -34,9 +34,10 @@ class AppAsset extends AssetBundle
         'lotteryAssets/js/jquery.slicknav.js',
         'lotteryAssets/js/main.js',
         'lotteryAssets/js/owl.carousel.js',
-        'lotteryAssets/js/public.js',
         'lotteryAssets/js/report_settled.js',
-        'lotteryAssets/js/jquery.mobile-1.2.0.min.js',
+        //'lotteryAssets/js/jquery.mobile-1.2.0.min.js',
+        //'lotteryAssets/js/public.js',
+
     ];
     public $depends = [
         'yii\web\YiiAsset',

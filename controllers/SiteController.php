@@ -123,7 +123,7 @@ class SiteController extends Controller
         if ($ndate = yii::$app->request->get('ndate', 0)) {
             $ndate = $ndate == 1 ? time() : strtotime("-1 day");
             $announcementQuery->andFilterWhere([
-                'ndate' => date("Y-m-d",$ndate),
+                'ndate' => date("Y-m-d", $ndate),
             ]);
         }
 
@@ -139,7 +139,7 @@ class SiteController extends Controller
             ->offset(($pageSize - 1) * $pageNo)->limit($pageNo)->asArray()->all();
 
 
-        return $this->render('announcement',[
+        return $this->render('announcement', [
             'list' => $list,
             'totalCount' => $count,
         ]);
@@ -164,7 +164,7 @@ class SiteController extends Controller
     {
         return $this->render('account-sub-list');
     }
-    
+
     /**
      * 详情设定
      *
@@ -194,7 +194,7 @@ class SiteController extends Controller
             if ($model->load(yii::$app->request->post(), '') && $model->twicePasswordIsEqule()) {
                 $memberModel = WebMemberModel::findOne(yii::$app->user->id);
                 $memberModel->Passwd = $model->password;
-                if($memberModel->update()) {
+                if ($memberModel->update()) {
                     Yii::$app->getResponse()->redirect(Yii::$app->getHomeUrl());
                 }
                 $model->addErrors($memberModel->getErrors());
@@ -211,7 +211,7 @@ class SiteController extends Controller
      *
      * @return string
      */
-    public function  actionNewestWebsite()
+    public function actionNewestWebsite()
     {
         return $this->render('newest-website');
     }
@@ -221,7 +221,7 @@ class SiteController extends Controller
      *
      * @return string
      */
-    public function  actionReport()
+    public function actionReport()
     {
         return $this->render('report');
     }
@@ -439,7 +439,7 @@ class SiteController extends Controller
 
     /**
      * 恢复密码
-     * 
+     *
      * @return string
      */
     public function actionRecoveryPassword()
@@ -449,37 +449,167 @@ class SiteController extends Controller
         $member->save();
         yii::$app->response->redirect(Url::to('/site/index'));
     }
-    
+
     /**
      * 月帐期数表
-     * 
+     *
      * @return string
      */
     public function actionReportSheet()
     {
+        $currentYear = date('Y');
+        $currentDate = date('Y-m-d');
+        $lastYear = $currentYear - 1;
+
+        $step = 27 * 3600 * 24;
+        $currentYearStart = '2017-12-25';
+        $lastYearStart = '2016-12-26';
+        $allData = [];
+        for ($i = 1; $i <= 13; $i++) {
+            $oneDay = $i > 1 ? 24 * 3600 * ($i - 1) : 0;
+            $temp['current'][0] = date('Y-m-d', strtotime($currentYearStart) + $step * ($i - 1) + $oneDay);
+            $temp['current'][1] = date('Y-m-d', strtotime($currentYearStart) + $step * ($i) + $oneDay);
+            $temp['class'] = '';
+            if ($temp['current'][0] < $currentDate && $currentDate < $temp['current'][1]) {
+                $temp['class'] = 'now';
+            }
+            $temp['last'][0] = date('Y-m-d', strtotime($lastYearStart) + $step * ($i - 1) + $oneDay);
+            $temp['last'][1] = date('Y-m-d', strtotime($lastYearStart) + $step * ($i) + $oneDay);
+            array_push($allData, $temp);
+        }
+
+        //var_export($allData);die;
         return $this->render('report-sheet', [
+            'result' => $allData,
         ]);
     }
-    
+
     /**
      * 有结果报表
-     * 
+     *
      * @return string
      */
     public function actionReportSettled()
     {
+        if (yii::$app->request->isPost) {
+            $report_kind = yii::$app->request->post('report_kind', '');
+            $pay_type = yii::$app->request->post('pay_type', '');
+            $wtype = yii::$app->request->post('wtype', '');
+            $date_start = yii::$app->request->post('date_start', '');
+            $date_end = yii::$app->request->post('date_end', '');
+            $gtype = yii::$app->request->post('gtype', '');
+            $cid = yii::$app->request->post('cid', '');
+            $aid = yii::$app->request->post('aid', '');
+            $sid = yii::$app->request->post('sid', '');
+            $mid = yii::$app->request->post('mid', '');
+            $uid = yii::$app->request->post('uid', '');
+            $result_type = yii::$app->request->post('result_type', '');
+
+
+            $QQ526738 = $result_type == 'Y' ? '<font color=green>有结果</font>' : '<font color=green>无结果</font>';
+
+            $row = WebAgentsModel::find()
+                ->where(['Oid' => $uid])
+                ->asArray()
+                ->one();
+
+            if ($row['subuser'] == 1) {
+                $agname = $row['subname'];
+                $loginfo = $agname . '子帐号:' . $row['subuser'] . '查询期间' . $date_start . '至' . $date_end . $QQ526738 . '报表';
+            } else {
+                $agname = $row['Agname'];
+                $loginfo = '代理商:' . $row['Agname'] . '查询期间' . $date_start . '至' . $date_end . $QQ526738 . '报表';
+            }
+
+            $agid = $row['ID'];
+            $super = $row['super'];
+            $corprator = $row['corprator'];
+            $world = $row['world'];
+            $where = $this->getReport($gtype, $wtype, $result_type, $report_kind, $date_start, $date_end, $row['subuser']);
+
+            $sql = "select agents as name, count(*) as coun,sum(betscore) as score,sum(m_result) as result,sum(a_result) as a_result,sum(result_a) as result_a,sum(vgold) as vgold,round(agent_point*0.01,2) as agent_point 
+          from web_db_io where " . $where . " and super='{$super}' and Agents='{$agname}' and pay_type=1 group by agents order by name asc";
+
+            $connection  = Yii::$app->db;
+            $command = $connection->createCommand($sql);
+            $result     = $command->queryAll();
+
+            return $this->render('report-settled-result', [
+                'result' => $result,
+            ]);
+        }
+
         return $this->render('report-settled', [
         ]);
     }
-    
+
     /**
      * 无结果报表
-     * 
+     *
      * @return string
      */
     public function actionReportUnSettled()
     {
         return $this->render('report-un-settled', [
         ]);
+    }
+
+    private function getReport($gtype, $wtype, $result_type, $report_kind, $date_start, $date_end, $subuser)
+    {
+        switch ($gtype) {
+            case 'FT':
+                $active = ' active<3 and ';
+                break;
+            case 'BK':
+                $active = ' active=3 and ';
+                break;
+            case 'TN':
+                $active = ' active=4 and ';
+                break;
+            case 'VB':
+                $active = ' active=5 and ';
+                break;
+            case 'BS':
+                $active = ' active=7 and ';
+                break;
+            case 'FS':
+                $active = ' active=6 and ';
+                break;
+            case 'OP':
+                $active = ' active=8 and ';
+                break;
+            default:
+                $active = '';
+                break;
+        }
+
+        if ($wtype != '') {
+            $w_type = " wtype='$wtype' and ";
+        } else {
+            $w_type = '';
+        }
+
+        if ($subuser == 0) {
+            if ($result_type == 'Y') {
+                $result_type1 = " result_type=1 and ";
+            } else {
+                $result_type1 = " result_type=0 and ";
+            }
+        } else {
+            $result_type1 = " result_type=1 and ";
+        }
+
+        switch ($report_kind) {
+            case "D":
+                $cancel = ' status>1 and ';
+                break;
+            case "D4":
+                $cancel = ' status=1 and ';
+                break;
+            default:
+                $cancel = '';
+                break;
+        }
+        return $active . $w_type . $result_type1 . $cancel . " m_date>='$date_start' and  hidden=0 and m_date<='$date_end' ";
     }
 }

@@ -8,8 +8,9 @@ $this->title = '有结果报表';
 
 <div class="container">
     <div class="row clearfix">
-        <form action="report_settled_1.html" method="post">
-        <div class="col-md-12 column">
+        <form action="" method="post">
+            <input type="hidden" name="_csrf" value="<?= Yii::$app->request->csrfToken ?>">
+            <div class="col-md-12 column">
             <div data-role="content" class="MAIN REPORT ui-content" role="main">
                 <h4><?= $this->title?></h4>
                 <div data-role="content" class="REPORT ui-content" role="main">
@@ -201,7 +202,6 @@ $this->title = '有结果报表';
     }
 </style>
 <?php $this->beginBlock('footer');?>
-<script>
 <script>
 $("#selectmenugtype").change(function(){
     var val = $("#selectmenugtype option:selected").text();
