@@ -8,7 +8,8 @@ $this->title = '月帐期数表';
 
 <div class="container">
     <div class="row clearfix">
-        <form action="report_un_settled_1.html" method="post">
+        <form action="<?= \yii\helpers\Url::to('/site/report-un-settled')?>" method="post">
+            <input type="hidden" name="_csrf" value="<?= Yii::$app->request->csrfToken ?>">
             <div class="col-md-12 column">
                 <div data-role="content" class="MAIN REPORT ui-content" role="main">
                     <h4>无结果报表</h4>
@@ -19,7 +20,7 @@ $this->title = '月帐期数表';
                                 <span class="ui-btn-text"><span id="selectSelectmenugtype">全部球类</span></span>
                                 <span class="ui-icon ui-icon-arrow-d ui-icon-shadow">&nbsp;</span>
                             </span>
-                                <select class="ui-btn-text" name="selectmenugtype"  id="selectmenugtype" data-corners="false">
+                                <select class="ui-btn-text" name="gtype"  id="selectmenugtype" data-corners="false">
                                     <option value="">全部球类</option>
                                     <option value="FT">足球</option>
                                     <option value="BK">篮球 / 美式足球</option>
@@ -36,9 +37,9 @@ $this->title = '月帐期数表';
                         </div>
                         <div class="ui-select">
                             <div data-corners="false" data-shadow="true" data-iconshadow="true" data-wrapperels="span" data-icon="arrow-d" data-iconpos="right" data-theme="c" class="ui-btn ui-btn-up-c ui-shadow ui-btn-icon-right">
-                            <span class="ui-btn-inner"><span class="ui-btn-text"><span id="selectSelectmenurtype">全部玩法</span></span>
+                            <span class="ui-btn-inner"><span class="ui-btn-text"><span id="rtype">全部玩法</span></span>
                                 <span class="ui-icon ui-icon-arrow-d ui-icon-shadow">&nbsp;</span>
-                            <select name="selectmenuwtype" id="selectmenurtype" data-corners="false">
+                            <select name="wtype" id="selectmenurtype" data-corners="false">
                                 <option value="">全部玩法</option>
                                 <option value="R">让球(分)</option>
                                 <option value="RE">滚球</option>
@@ -160,7 +161,7 @@ $this->title = '月帐期数表';
                                 </span>
                                 <span class="ui-icon ui-icon-arrow-d ui-icon-shadow">&nbsp;</span>
                             </span>
-                                <select name="selectmenudaytype" id="selectmenudaytype" data-corners="false">
+                                <select name="daytype" id="selectmenudaytype" data-corners="false">
                                     <option value="today">今日</option>
                                     <option value="yesterday">昨日</option>
                                     <option value="tomorrow">明日</option>
@@ -173,8 +174,8 @@ $this->title = '月帐期数表';
                         </div>
                         <fieldset>
                             <label for="datestart" class="ui-input-text">日期区间: </label>
-                            <input type="date" id="datestart" data-inline="true" class="report_date ui-input-text ui-body-c ui-corner-all ui-shadow-inset"> 至
-                            <input type="date" data-inline="true" id="dateend" class="report_date ui-input-text ui-body-c ui-corner-all ui-shadow-inset">
+                            <input type="date" name="date_start" id="datestart" data-inline="true" class="report_date ui-input-text ui-body-c ui-corner-all ui-shadow-inset"> 至
+                            <input type="date"  name="date_end" data-inline="true" id="dateend" class="report_date ui-input-text ui-body-c ui-corner-all ui-shadow-inset">
                         </fieldset>
                         <div class="row-fluid" style="background-color: #333">
                             <div class="span12" style="background-color: #333">

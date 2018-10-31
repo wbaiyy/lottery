@@ -162,7 +162,20 @@ class SiteController extends Controller
      */
     public function actionAccountSubList()
     {
-        return $this->render('account-sub-list');
+        $Agname = WebAgentsModel::find()
+            ->select('Agname')
+            ->where(['Oid' => '', 'subuser' =>0])
+            ->asArray()
+            ->one();
+
+        $accounts = WebAgentsModel::find()
+            ->where(['Agname' => $Agname['Agname'], 'subuser' =>1])
+            ->asArray()
+            ->all();
+
+        return $this->render('account-sub-list', [
+            'result' => $accounts,
+        ]);
     }
 
     /**
@@ -492,7 +505,7 @@ class SiteController extends Controller
     public function actionReportSettled()
     {
         if (yii::$app->request->isPost) {
-            $report_kind = yii::$app->request->post('report_kind', '');
+            $report_kind = yii::$app->request->post('report_kind', 'D');
             $pay_type = yii::$app->request->post('pay_type', '');
             $wtype = yii::$app->request->post('wtype', '');
             $date_start = yii::$app->request->post('date_start', '');
@@ -503,10 +516,8 @@ class SiteController extends Controller
             $sid = yii::$app->request->post('sid', '');
             $mid = yii::$app->request->post('mid', '');
             $uid = yii::$app->request->post('uid', '');
-            $result_type = yii::$app->request->post('result_type', '');
-
-
-            $QQ526738 = $result_type == 'Y' ? '<font color=green>有结果</font>' : '<font color=green>无结果</font>';
+            $result_type = yii::$app->request->post('result_type', 'Y');
+            $uid = yii::$app->user->identity->id;
 
             $row = WebAgentsModel::find()
                 ->where(['Oid' => $uid])
@@ -515,10 +526,8 @@ class SiteController extends Controller
 
             if ($row['subuser'] == 1) {
                 $agname = $row['subname'];
-                $loginfo = $agname . '子帐号:' . $row['subuser'] . '查询期间' . $date_start . '至' . $date_end . $QQ526738 . '报表';
             } else {
                 $agname = $row['Agname'];
-                $loginfo = '代理商:' . $row['Agname'] . '查询期间' . $date_start . '至' . $date_end . $QQ526738 . '报表';
             }
 
             $agid = $row['ID'];
@@ -550,6 +559,49 @@ class SiteController extends Controller
      */
     public function actionReportUnSettled()
     {
+        if (yii::$app->request->isPost) {
+            $report_kind = yii::$app->request->post('report_kind', 'D');
+            $pay_type = yii::$app->request->post('pay_type', '');
+            $wtype = yii::$app->request->post('wtype', '');
+            $date_start = yii::$app->request->post('date_start', '');
+            $date_end = yii::$app->request->post('date_end', '');
+            $gtype = yii::$app->request->post('gtype', '');
+            $cid = yii::$app->request->post('cid', '');
+            $aid = yii::$app->request->post('aid', '');
+            $sid = yii::$app->request->post('sid', '');
+            $mid = yii::$app->request->post('mid', '');
+            $result_type = yii::$app->request->post('result_type', 'N');
+            $uid = yii::$app->user->identity->id;
+
+            $row = WebAgentsModel::find()
+                ->where(['Oid' => $uid])
+                ->asArray()
+                ->one();
+
+            if ($row['subuser'] == 1) {
+                $agname = $row['subname'];
+            } else {
+                $agname = $row['Agname'];
+            }
+
+            $agid = $row['ID'];
+            $super = $row['super'];
+            $corprator = $row['corprator'];
+            $world = $row['world'];
+            $where = $this->getReport($gtype, $wtype, $result_type, $report_kind, $date_start, $date_end, $row['subuser']);
+
+            $sql = "select agents as name, count(*) as coun,sum(betscore) as score,sum(m_result) as result,sum(a_result) as a_result,sum(result_a) as result_a,sum(vgold) as vgold,round(agent_point*0.01,2) as agent_point 
+          from web_db_io where " . $where . " and super='{$super}' and Agents='{$agname}' and pay_type=1 group by agents order by name asc";
+
+            $connection  = Yii::$app->db;
+            $command = $connection->createCommand($sql);
+            $result     = $command->queryAll();
+
+            return $this->render('report-un-settled-result', [
+                'result' => $result,
+            ]);
+        }
+
         return $this->render('report-un-settled', [
         ]);
     }

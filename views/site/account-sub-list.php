@@ -18,6 +18,7 @@ $this->title = '帐号管理-子帐号';
                     </div>
                 </div>
             <tbody>
+            <?php if (!empty($result)):?>
             <tr class="tha">
                 <th class="td40" style="text-align:center;">子帐号</th>
                 <th class="td40" style="text-align:center;">帐号</th>
@@ -25,22 +26,29 @@ $this->title = '帐号管理-子帐号';
             </tr>
             </tbody>
          <tbody id="tbody_list">
-         <tr id="tr_add" class="acc_tr">
-            <td id="td_1">Test123456</td>
-            <td id="td_2">Test654321</td>
-            <td data-pri="B1">
-                <a href="#edit_bar" data-rel="popup" data-position-to="window" data-role="button" data-inline="true" class="btn_arr_down ui-btn ui-btn-up-c ui-shadow ui-btn-corner-all ui-btn-inline" data-corners="true" data-shadow="true" data-iconshadow="true" data-wrapperels="span" data-theme="c" aria-haspopup="true" aria-owns="#edit_bar">
-                    <span class="ui-btn-inner ui-btn-corner-all">
-                        <span class="ui-btn-text">&nbsp;</span>
-                    </span>
-                </a>
-            </td>
-        </tr>
+             <?php foreach ($result as $row):?>
+                 <tr id="tr_add" class="acc_tr">
+                     <td id="td_1">
+                         <INPUT TYPE="HIDDEN" NAME="id" value="<?=$row['ID']?>">
+                         <?=$row['Agname']?></td>
+                     <td id="td_2"><?=$row['passwd_safe']?></td>
+                     <td data-pri="B1">
+                         <a href="#edit_bar" data-rel="popup" data-position-to="window" data-role="button" data-inline="true" class="btn_arr_down ui-btn ui-btn-up-c ui-shadow ui-btn-corner-all ui-btn-inline" data-corners="true" data-shadow="true" data-iconshadow="true" data-wrapperels="span" data-theme="c" aria-haspopup="true" aria-owns="#edit_bar">
+                            <span class="ui-btn-inner ui-btn-corner-all">
+                                <span class="ui-btn-text">&nbsp;</span>
+                            </span>
+                         </a>
+                     </td>
+                 </tr>
+             <?php endforeach;?>
          </tbody>
+            <?php else:?>
+                未搜寻到指定相关资料
+            <?php endif;?>
         </table>
     </div>
     <div id="edit_bar" class="repor_edit_bar">
-        <a href="index.html" id="back_report" class="del_acc ui-btn ui-btn-up-a ui-shadow" data-theme="a" data-role="button" data-corners="false" data-shadow="true" data-iconshadow="true" data-wrapperels="span"><span class="ui-btn-inner"><span class="ui-btn-text">报表首页</span></span></a>
+        <a href="<?= \yii\helpers\Url::to('/site/account')?>" id="back_report" class="del_acc ui-btn ui-btn-up-a ui-shadow" data-theme="a" data-role="button" data-corners="false" data-shadow="true" data-iconshadow="true" data-wrapperels="span"><span class="ui-btn-inner"><span class="ui-btn-text">帐号首页</span></span></a>
     </div>
 </div>
 <style>
