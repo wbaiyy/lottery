@@ -43,6 +43,44 @@
     <div data-role="content" class="MAIN SUB ui-content" role="main">
         <h4>帐号管理-会员</h4>
         <table border="0" cellspacing="0" cellpadding="0" class="comm_tab noborder list_color1">
+            <form action="#" method="post">
+                <div class="find_box">
+                    <div class="sel_bar ui-grid-a">
+                        <div class="option ui-block-a">
+                            <div class="ui-select">
+                                <div data-corners="true" data-shadow="false" data-iconshadow="true" data-wrapperels="span" data-icon="arrow-d" data-iconpos="right" data-theme="s" class="ui-btn ui-btn-corner-all ui-btn-icon-right ui-btn-up-s">
+                                <span class="ui-btn-inner ui-btn-corner-all">
+                                    <span class="ui-btn-text"><span id="Selectenable">状态</span></span>
+                                    <span class="ui-icon ui-icon-arrow-d ui-icon-shadow">&nbsp;</span>
+                                </span>
+                                    <select id="enable" data-theme="s" data-shadow="false">
+                                        <option value="" selected="selected">状态</option>
+                                        <option value="Y">启用</option>
+                                        <option value="N">停用</option>
+                                        <option value="S">只能看帐</option>
+                                        <option value="F">禁止登入</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="option ui-block-b">
+                            <div class="ui-select">
+                                <div data-corners="true" data-shadow="false" data-iconshadow="true" data-wrapperels="span" data-icon="arrow-d" data-iconpos="right" data-theme="s" class="ui-btn ui-btn-corner-all ui-btn-icon-right ui-btn-up-s">
+                                <span class="ui-btn-inner ui-btn-corner-all">
+                                    <span class="ui-btn-text"><span id="Selectsort">排序</span></span>
+                                    <span class="ui-icon ui-icon-arrow-d ui-icon-shadow">&nbsp;</span>
+                                </span>
+                                    <select name="sort" id="sort" data-theme="s" data-shadow="false">
+                                        <option value="" selected="selected">排序</option>
+                                        <option value="username">帐号</option>
+                                        <option value="alias">名称</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
             <tbody>
             <tr class="tha">
                 <th class="td40" style="text-align:center;">帐号</th>
@@ -84,3 +122,13 @@
         border-right-color: #FFF!important;
     }
 </style>
+<script>
+    $("#enable").change(function(){
+        var val = $("#enable option:selected").text();
+        $("#Selectenable").html(val);
+    });
+    $("#sort").change(function(){
+        var val = $("#sort option:selected").text();
+        $("#Selectsort").html(val);
+    });
+</script>
