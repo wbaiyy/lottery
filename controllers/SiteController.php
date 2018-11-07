@@ -179,6 +179,64 @@ class SiteController extends Controller
     }
 
     /**
+     * 帐号 会员
+     *
+     * @return string
+     */
+    public function actionAccountMemList()
+    {
+        $postData = yii::$app->request->post();
+        $uid = $postData["uid"]  ?? '';
+        $enable = $postData["enable"] ?? '';
+        $enabled = $postData["enabled"] ?? '';
+        $uname = $postData["uname"] ?? '';
+        $sort = $postData["sort"] ?? '';
+        $orderby = $postData["orderby"] ?? '';
+        $mid = $postData["id"] ?? '';
+        $active = $postData["active"] ?? '';
+        $page = $postData["page"] ?? '';
+
+        $agent = WebAgentsModel::find()
+            ->where(['Oid' => $uid])
+            ->asArray()
+            ->one();
+
+        if ($sort == '' and $orderby==''){
+            $orderbyStr = '';
+        }else if ($sort != "" and $orderby==''){
+            $orderbyStr=$sort . " desc";
+        }else if ($sort=='' and $orderby != ''){
+            $orderbyStr='alias '.$orderby;
+        }else{
+            $orderbyStr =$sort.' '.$orderby;
+        }
+        if ($enable == "Y") {
+            $enabled=1;
+        } elseif ($enable == "N") {
+            $enabled=0;
+        } else {
+            $enabled=2;
+        }
+
+        $result = WebMemberModel::find()
+            ->where([
+                'Status' => $enabled,
+                'Agents' => $agent['Agname'],
+                'super' => $agent['super'],
+            ])->andFilterWhere([
+                'Memname' => $uname
+            ])->orderBy($orderbyStr)
+            ->asArray()
+            ->all();
+
+        return $this->render('account-mem-list', [
+            'result' => $result,
+            'enable' => $enable,
+            'sort' => $sort,
+        ]);
+    }
+
+    /**
      * 详情设定
      *
      * @return string

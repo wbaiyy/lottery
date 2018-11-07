@@ -41,7 +41,10 @@ $this->params['breadcrumbs'][] = $this->title;
         <div class="col-xs-12" align="center">
             <div class="row-fluid">
                 <div class="span12">
-                    <button class="btn btn-large btn-inverse btn-block" type="button"  onclick="anotice();">会员</button>
+                    <a href="<?= \yii\helpers\Url::to('/site/account-mem-list')?>">
+
+                    <button class="btn btn-large btn-inverse btn-block" type="button">会员</button>
+                    </a>
                 </div>
             </div>
         </div>
